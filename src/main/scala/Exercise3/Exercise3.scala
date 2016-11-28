@@ -19,23 +19,41 @@ object Exercise3_1 {
 }
 
 object Exercise3_2 {
-  def tail[A](l: List[A]): List[A] = ???
+  def tail[A](l: List[A]): List[A] = l match {
+    case Nil => sys.error("empty list")
+    case Cons(_, xs) => xs
+  }
 }
 
 object Exercise3_3 {
-  def setHead[A](l: List[A], h: A): List[A] = ???
+  def setHead[A](l: List[A], h: A): List[A] = l match {
+    case Nil => sys.error("empty list")
+    case Cons(_, xs) => Cons(h, xs)
+  }
 }
 
 object Exercise3_4 {
-  def drop[A](l: List[A], n: Int): List[A] = ???
+  def drop[A](l: List[A], n: Int): List[A] =
+    if (n <= 0) l
+    else l match {
+      case Nil => Nil
+      case Cons(_, xs) => drop(xs, n - 1)
+    }
 }
 
 object Exercise3_5 {
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = ???
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Cons(x, xs) if f(x) => dropWhile(xs, f)
+    case _ => l
+  }
 }
 
 object Exercise3_6 {
-  def init[A](l: List[A]): List[A] = ???
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => sys.error("empty list")
+    case Cons(_, Nil) => Nil
+    case Cons(x, xs) => Cons(x, init(xs))
+  }
 }
 
 object Exercise3_8 {
@@ -45,19 +63,23 @@ object Exercise3_8 {
 }
 
 object Exercise3_9 {
-  def length[A](l: List[A]): Int = ???
+  def length[A](l: List[A]): Int = List.foldRight(l, 0)((_, acc) => acc + 1)
 }
 
 object Exercise3_10 {
-  def foldLeft[A, B](l: List[A], z: B)(f: (B, A) => B): B = ???
+  def foldLeft[A, B](l: List[A], z: B)(f: (B, A) => B): B = l match {
+    case Nil => z
+    case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+
+  }
 }
 
 object Exercise3_11 {
-  def sum(l: List[Int]) = ???
+  def sum(l: List[Int]) = Exercise3_10.foldLeft(l, 0)(_ + _)
 
-  def product(l: List[Double]) = ???
+  def product(l: List[Double]) = Exercise3_10.foldLeft(l, 1.0)(_ * _)
 
-  def length[A](l: List[A]): Int = ???
+  def length[A](l: List[A]): Int = Exercise3_10.foldLeft(l, 0)((acc, _) => acc + 1)
 }
 
 object Exercise3_12 {
