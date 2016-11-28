@@ -38,6 +38,12 @@ object Exercise3_6 {
   def init[A](l: List[A]): List[A] = ???
 }
 
+object Exercise3_8 {
+  def main(args: Array[String]): Unit = {
+    println(List.foldRight(Cons(1, Cons(2, Cons(3, Nil))), Nil:List[Int])(Cons(_,_)))
+  }
+}
+
 object Exercise3_9 {
   def length[A](l: List[A]): Int = ???
 }
@@ -50,6 +56,8 @@ object Exercise3_11 {
   def sum(l: List[Int]) = ???
 
   def product(l: List[Double]) = ???
+
+  def length[A](l: List[A]): Int = ???
 }
 
 object Exercise3_12 {
