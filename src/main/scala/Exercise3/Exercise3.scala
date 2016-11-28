@@ -40,7 +40,7 @@ object Exercise3_6 {
 
 object Exercise3_8 {
   def main(args: Array[String]): Unit = {
-    println(List.foldRight(Cons(1, Cons(2, Cons(3, Nil))), Nil:List[Int])(Cons(_,_)))
+    println(List.foldRight(Cons(1, Cons(2, Cons(3, Nil))), Nil: List[Int])(Cons(_, _)))
   }
 }
 
@@ -65,9 +65,9 @@ object Exercise3_12 {
 }
 
 object Exercise3_13 {
-  def foldRightViaFoldLeft[A,B](l: List[A], z: B)(f: (A,B) => B): B = ???
+  def foldRightViaFoldLeft[A, B](l: List[A], z: B)(f: (A, B) => B): B = ???
 
-  def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B,A) => B): B = ???
+  def foldLeftViaFoldRight[A, B](l: List[A], z: B)(f: (B, A) => B): B = ???
 }
 
 object Exercise3_14 {
@@ -95,7 +95,7 @@ object Exercise3_19 {
 }
 
 object Exercise3_20 {
-  def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] = ???
+  def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] = ???
 }
 
 object Exercise3_21 {
@@ -107,7 +107,7 @@ object Exercise3_22 {
 }
 
 object Exercise3_23 {
-  def zipWith[A,B,C](a: List[A], b: List[B])(f: (A,B) => C): List[C] = ???
+  def zipWith[A, B, C](a: List[A], b: List[B])(f: (A, B) => C): List[C] = ???
 }
 
 object Exercise3_24 {
@@ -131,11 +131,11 @@ object Exercise3_27 {
 }
 
 object Exercise3_28 {
-  def map[A,B](t: Tree[A])(f: A => B): Tree[B] = ???
+  def map[A, B](t: Tree[A])(f: A => B): Tree[B] = ???
 }
 
 object Exercise3_29 {
-  def fold[A,B](t: Tree[A])(f: A => B)(g: (B,B) => B): B = ???
+  def fold[A, B](t: Tree[A])(f: A => B)(g: (B, B) => B): B = ???
 
   def sizeViaFold[A](t: Tree[A]): Int = ???
 
@@ -143,5 +143,5 @@ object Exercise3_29 {
 
   def depthViaFold[A](t: Tree[A]): Int = ???
 
-  def mapViaFold[A,B](t: Tree[A])(f: A => B): Tree[B] = ???
+  def mapViaFold[A, B](t: Tree[A])(f: A => B): Tree[B] = ???
 }
