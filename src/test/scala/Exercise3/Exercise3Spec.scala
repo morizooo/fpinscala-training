@@ -52,5 +52,116 @@ class Exercise3Spec extends Specification {
       Exercise3_10.foldLeft(List("1", "2", "3"), 0)((acc, _) => acc + 1) must be_==(3)
     }
   }
+  "Exercise3_11" should {
+    "sumで合計を取得できること" in {
+      Exercise3_11.sum(List(1, 2, 3, 4)) must be_==(10)
+    }
+
+    "productで積を取得できること" in {
+      Exercise3_11.product(List(1, 2, 3, 4)) must be_==(24)
+    }
+
+    "lengthで長さを取得できること" in {
+      Exercise3_11.length(List(1, 2, 3, 4)) must be_==(4)
+    }
+  }
+
+  "Exercise3_12" should {
+    "reverseで要素を逆順にできること" in {
+      Exercise3_12.reverse(List("1", "2", "3")) must be_==(List("3", "2", "1"))
+    }
+  }
+
+  "Exercise3_13" should {
+    "foldRightで合計が取得できること" in {
+      Exercise3_13.foldRightViaFoldLeft(List(1, 2, 3), 0)(_ + _) must be_==(6)
+    }
+
+    "foldLeftで要素数を取得できること" in {
+      Exercise3_13.foldLeftViaFoldRight(List("1", "2", "3"), 0)((acc, _) => acc + 1) must be_==(3)
+    }
+  }
+
+  "Exercise3_14" should {
+    "foldRightでappendが取得できること" in {
+      Exercise3_14.appendViaFoldRight(List(1, 2), List(3, 4)) must be_==(List(1, 2, 3, 4))
+    }
+
+    "foldLeftでappendが取得できること" in {
+      Exercise3_14.appendViaFoldLeft(List(1, 2), List(3, 4)) must be_==(List(1, 2, 3, 4))
+    }
+  }
+
+  "Exercise3_15" should {
+    "concatができること" in {
+      Exercise3_15.concat(List(List(1, 2, 3, 4))) must be_==(List(1, 2, 3, 4))
+    }
+  }
+
+  "Exercise3_16" should {
+    "各要素に1が足されていることができること" in {
+      Exercise3_16.plusOne(List(1, 2, 3, 4)) must be_==(List(2, 3, 4, 5))
+    }
+  }
+
+  "Exercise3_17" should {
+    "各要素がdoubleからStringに変換されること" in {
+      Exercise3_17.doubleToString(List(1, 2, 3, 4)) must be_==(List("1.0", "2.0", "3.0", "4.0"))
+    }
+  }
+
+  "Exercise3_18" should {
+    "mapができること" in {
+      Exercise3_18.map(List(1, 2, 3, 4))(x => x.toString) must be_==(List("1", "2", "3", "4"))
+    }
+  }
+
+  "Exercise3_19" should {
+    "filterができること" in {
+      Exercise3_19.filter(List(1, 2, 3, 4))(x => x > 2) must be_==(List(3, 4))
+    }
+  }
+
+  "Exercise3_20" should {
+    "flatMapができること" in {
+      Exercise3_20.flatMap(List(1, 2, 3))(i => List(i, i)) must be_==(List(1, 1, 2, 2, 3, 3))
+    }
+  }
+
+  "Exercise3_21" should {
+    "filterができること" in {
+      Exercise3_21.filterViaFlatMap(List(1, 2, 3, 4))(x => x > 2) must be_==(List(3, 4))
+    }
+  }
+
+  "Exercise3_22" should {
+    "Listどうしの対応する要素の演算ができること" in {
+      Exercise3_22.addPairwise(List(1, 2, 3), List(4, 5, 6)) must be_==(List(5, 7, 9))
+    }
+  }
+
+  "Exercise3_23" should {
+    "zipWithができること" in {
+      Exercise3_23.zipWith(List(1, 2, 3), List(4, 5, 6))(_ + _) must be_==(List(5, 7, 9))
+    }
+  }
+
+  "Exercise3_24" should {
+    "startsWithが確認できること" in {
+      Exercise3_24.startsWith(List(1, 2, 3, 4), List(1, 2)) must beTrue
+      Exercise3_24.startsWith(List(1, 2, 3, 4), List(1, 2, 3)) must beTrue
+      Exercise3_24.startsWith(List(1, 2, 3, 4), List(2, 3)) must beFalse
+    }
+
+    "Exercise3_24" should {
+      "hasSubsequenceが確認できること" in {
+        Exercise3_24.hasSubsequence(List(1, 2, 3, 4), List(1, 2)) must beTrue
+        Exercise3_24.hasSubsequence(List(1, 2, 3, 4), List(2, 3)) must beTrue
+        Exercise3_24.hasSubsequence(List(1, 2, 3, 4), List(4)) must beTrue
+        Exercise3_24.hasSubsequence(List(1, 2, 3, 4), List(5)) must beFalse
+      }
+    }
+  }
+
 
 }

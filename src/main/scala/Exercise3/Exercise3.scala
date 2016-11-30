@@ -19,28 +19,28 @@ object Exercise3_1 {
   }
 }
 
-// Listの最初の要素を削除するtailを実装せよ
 object Exercise3_2 {
+  // Listの最初の要素を削除するtailを実装せよ
   def tail[A](l: List[A]): List[A] = ???
 }
 
-// Listの最初の要素を別の値と置き換えるsetHeadを実装せよ
 object Exercise3_3 {
+  // Listの最初の要素を別の値と置き換えるsetHeadを実装せよ
   def setHead[A](l: List[A], h: A): List[A] = ???
 }
 
-// リストのn個を削除するdropを実装せよ
 object Exercise3_4 {
+  // リストのn個を削除するdropを実装せよ
   def drop[A](l: List[A], n: Int): List[A] = ???
 }
 
-// 述語とマッチする場合に限りListの要素までを削除するdropWhileを実装せよ
 object Exercise3_5 {
+  // 述語とマッチする場合に限りListの要素までを削除するdropWhileを実装せよ
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] = ???
 }
 
-// Listの末尾を除いたListを返すinitを実装せよ
 object Exercise3_6 {
+  // Listの末尾を除いたListを返すinitを実装せよ
   def init[A](l: List[A]): List[A] = ???
 }
 
@@ -51,23 +51,23 @@ object Exercise3_8 {
   }
 }
 
-// foldRigthを使って要素数を取得するlengthを実装せよ
 object Exercise3_9 {
+  // foldRigthを使って要素数を取得するlengthを実装せよ
   def length[A](l: List[A]): Int = ???
 }
 
-// 再帰を用いてListの処理を行うfoldLeftを実装せよ
 object Exercise3_10 {
-//  @annotation.tailrec
+  // 再帰を用いてListの処理を行うfoldLeftを実装せよ
+  //  @annotation.tailrec
   def foldLeft[A, B](l: List[A], z: B)(f: (B, A) => B): B = ???
 }
 
 object Exercise3_11 {
   // foldLeftを使って全要素の和を計算すsumを実装せよ
-  def sum(l: List[Int]) = ???
+  def sum(l: List[Int]): Int = ???
 
   // foldLeftを使って全要素の積を計算するproductを実装せよ
-  def product(l: List[Double]) = ???
+  def product(l: List[Double]): Double = ???
 
   // foldLeftを使ってlengthを実装せよ
   def length[A](l: List[A]): Int = ???
