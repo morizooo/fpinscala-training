@@ -97,78 +97,105 @@ object Exercise3_11 {
 
 object Exercise3_12 {
   // リストの逆順を返すreverseを実装せよ
-  def reverse[A](l: List[A]): List[A] = ???
+  def reverse[A](l: List[A]): List[A] = Exercise3_10.foldLeft(l, List[A]())((acc, h) => Cons(h, acc))
 }
 
 object Exercise3_13 {
   // foldLeftを使ってfoldRightを実装せよ
-  def foldRightViaFoldLeft[A, B](l: List[A], z: B)(f: (A, B) => B): B = ???
+  def foldRightViaFoldLeft[A, B](l: List[A], z: B)(f: (A, B) => B): B =
+  Exercise3_10.foldLeft(l, (b: B) => b)((g, a) => b => g(f(a, b)))(z)
 
   // foldRightを使ってfoldLeftを実装せよ
-  def foldLeftViaFoldRight[A, B](l: List[A], z: B)(f: (B, A) => B): B = ???
+  def foldLeftViaFoldRight[A, B](l: List[A], z: B)(f: (B, A) => B): B =
+  List.foldRight(l, (c: B) => c)((a, g) => b => g(f(b, a)))(z)
 }
 
 object Exercise3_14 {
   // foldLeftを使ってappendを実装せよ
-  def appendViaFoldRight[A](a1: List[A], a2: List[A]): List[A] = ???
+  def appendViaFoldRight[A](a1: List[A], a2: List[A]): List[A] =
+  List.foldRight(a1, a2)(Cons(_, _))
 
   // foldRightを使ってappendを実装せよ
-  def appendViaFoldLeft[A](a1: List[A], a2: List[A]): List[A] = ???
+  def appendViaFoldLeft[A](a1: List[A], a2: List[A]): List[A] =
+  Exercise3_10.foldLeft(Exercise3_12.reverse(a1), a2)((a, b) => Cons(b, a))
 }
 
 object Exercise3_15 {
   // 複数のリストからなるリストを１つのリストとして連結するconcatを実装せよ
-  def concat[A](l: List[List[A]]): List[A] = ???
+  def concat[A](l: List[List[A]]): List[A] =
+  List.foldRight(l, Nil: List[A])(List.append)
 }
 
 object Exercise3_16 {
   // 各要素に1を足しわせるplusOneを実装せよ
-  def plusOne(l: List[Int]): List[Int] = ???
+  def plusOne(l: List[Int]): List[Int] =
+  List.foldRight(l, Nil: List[Int])((x, xs) => Cons(x + 1, xs))
 }
 
 object Exercise3_17 {
   // Doubleの各要素をStringに変換するdoubleToStringを実装せよ
-  def doubleToString(l: List[Double]): List[String] = ???
+  def doubleToString(l: List[Double]): List[String] =
+  List.foldRight(l, Nil: List[String])((x, xs) => Cons(x.toString, xs))
 }
 
 object Exercise3_18 {
   // リストの各要素を展開し、かつリストの構造を保つmapを実装せよ
-  def map[A, B](l: List[A])(f: A => B): List[B] = ???
+  def map[A, B](l: List[A])(f: A => B): List[B] =
+  List.foldRight(l, Nil: List[B])((x, xs) => Cons(f(x), xs))
 }
 
 object Exercise3_19 {
   // 与えられた述語条件が満たされるまでリストから要素を削除するるfilterを実装せよ
-  def filter[A](l: List[A])(f: A => Boolean): List[A] = ???
+  def filter[A](l: List[A])(f: A => Boolean): List[A] =
+  List.foldRight(l, Nil: List[A])((x, xs) => if (f(x)) Cons(x, xs) else xs)
 }
 
 object Exercise3_20 {
   // mapと同じような動きをするflatMapを実装せよ
-  def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] = ???
+  def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] =
+  Exercise3_15.concat(Exercise3_18.map(l)(f))
 }
 
 object Exercise3_21 {
   // flatMapを用いてfilterを実装せよ
-  def filterViaFlatMap[A](l: List[A])(f: A => Boolean): List[A] = ???
+  def filterViaFlatMap[A](l: List[A])(f: A => Boolean): List[A] =
+  Exercise3_20.flatMap(l)(a => if (f(a)) List(a) else Nil)
 }
 
 object Exercise3_22 {
   // リストを２つ受け取り、対応する要素同士を足し合わせるaddPairwiseを実装せよ
-  def addPairwise(a: List[Int], b: List[Int]): List[Int] = ???
+  def addPairwise(a: List[Int], b: List[Int]): List[Int] = (a, b) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (Cons(x1, xs1), Cons(x2, xs2)) => Cons(x1 + x2, addPairwise(xs1, xs2))
+  }
 }
 
 object Exercise3_23 {
   // addPairwiseの要素を一般化したzipWithを実装せよ
-  def zipWith[A, B, C](a: List[A], b: List[B])(f: (A, B) => C): List[C] = ???
+  def zipWith[A, B, C](a: List[A], b: List[B])(f: (A, B) => C): List[C] = (a, b) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (Cons(x1, xs1), Cons(x2, xs2)) => Cons(f(x1, x2), zipWith(xs1, xs2)(f))
+  }
 }
 
 // Listに別のListがサブシーケンスを含んでいるか調べるhasSubsequenceを実装せよ
 // 特定のリストで始まっているか調べるstartsWithを実装して呼ぶとよい
 object Exercise3_24 {
-  //  @annotation.tailrec
-  def startsWith[A](l: List[A], prefix: List[A]): Boolean = ???
+  @annotation.tailrec
+  def startsWith[A](l: List[A], prefix: List[A]): Boolean = (l, prefix) match {
+    case (_, Nil) => true
+    case (Cons(h, t), Cons(h2, t2)) if h == h2 => startsWith(t, t2)
+    case _ => false
+  }
 
-  //  @annotation.tailrec
-  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = ???
+  @annotation.tailrec
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = sup match {
+    case Nil => sub == Nil
+    case _ if startsWith(sup, sub) => true
+    case Cons(_, t) => hasSubsequence(t, sub)
+  }
 }
 
 object Exercise3_25 {
