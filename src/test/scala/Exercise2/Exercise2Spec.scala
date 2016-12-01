@@ -22,7 +22,11 @@ class Exercise2Spec extends Specification {
     }
 
     "Int配列がソートされていない場合にFalseを返す" in {
-      Exercise2_2.isSorted(Array(1, 3, 2, 4, 5), (x: Int, y: Int) => x < y) must beFalse
+      Exercise2_2.isSorted(Array(1, 3, 2, 4, 5), (x: Int, y: Int) => x > y) must beFalse
+    }
+
+    "空配列はTrueを返す" in {
+      Exercise2_2.isSorted(Array.empty, (x: Int, y: Int) => x > y) must beTrue
     }
   }
 
