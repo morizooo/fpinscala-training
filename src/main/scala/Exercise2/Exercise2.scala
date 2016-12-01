@@ -4,9 +4,10 @@ object Exercise2_1 {
   // n番目のフィボナッチ数列を取得するfibを実装せよ
   def fib(n: Int): Int = {
     @annotation.tailrec
-    def loop(n: Int, prev: Int, cur: Int): Int =
+    def loop(n: Int, prev: Int, cur: Int): Int = {
       if (n == 0) prev
       else loop(n - 1, cur, prev + cur)
+    }
     loop(n, 0, 1)
   }
 }
@@ -15,10 +16,11 @@ object Exercise2_2 {
   // Array[A]がソートされているか調べるisSortedを実装せよ
   def isSorted[A](as: Array[A], gt: (A, A) => Boolean): Boolean = {
     @annotation.tailrec
-    def loop(n: Int): Boolean =
+    def loop(n: Int): Boolean = {
       if (n >= as.length - 1) true
       else if (gt(as(n), as(n + 1))) false
       else loop(n + 1)
+    }
     loop(0)
   }
 }
