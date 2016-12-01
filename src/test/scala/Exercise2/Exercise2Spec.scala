@@ -2,7 +2,7 @@ package Exercise2
 
 import org.specs2.mutable.Specification
 
-class Exercise2Spec extends Specification {
+class Exercise2_1Spec extends Specification {
   "Exercise2_1" should {
     "フィボナッチ数列を取得できること" in {
       Exercise2_1.fib(0) must be_==(0)
@@ -15,17 +15,25 @@ class Exercise2Spec extends Specification {
       Exercise2_1.fib(40) must be_==(102334155)
     }
   }
+}
 
+class Exercise2_2Spec extends Specification {
   "Exercise2_2" should {
     "Int配列がソートされている場合にTrueを返す" in {
       Exercise2_2.isSorted(Array(1, 2, 3, 4, 5), (x: Int, y: Int) => x > y) must beTrue
     }
 
     "Int配列がソートされていない場合にFalseを返す" in {
-      Exercise2_2.isSorted(Array(1, 3, 2, 4, 5), (x: Int, y: Int) => x < y) must beFalse
+      Exercise2_2.isSorted(Array(1, 3, 2, 4, 5), (x: Int, y: Int) => x > y) must beFalse
+    }
+
+    "空配列はTrueを返す" in {
+      Exercise2_2.isSorted(Array.empty, (x: Int, y: Int) => x > y) must beTrue
     }
   }
+}
 
+class Exercise2_3Spec extends Specification {
   "Exercise2_3" should {
     "Intの加算がカリー化できること" in {
       val plus = (a: Int, b: Int) => a + b
@@ -39,7 +47,9 @@ class Exercise2Spec extends Specification {
       strConcatenationCurry("1")("2") must be_==("12")
     }
   }
+}
 
+class Exercise2_4Spec extends Specification {
   "Exercise2_4" should {
     "Intの加算がアンカリー化できること" in {
       val intPlusCurry = Exercise2_3.curry((a: Int, b: Int) => a + b)
@@ -53,7 +63,9 @@ class Exercise2Spec extends Specification {
       strConcatenationUnCurry("1", "2") must be_==("12")
     }
   }
+}
 
+class Exercise2_5Spec extends Specification {
   "Exercise2_5" should {
     "intから数字変換と10の掛け算が合成できること" in {
       val int2str = (x: Int) => x.toString
@@ -62,5 +74,4 @@ class Exercise2Spec extends Specification {
       compose(10) must be_==("100")
     }
   }
-
 }
