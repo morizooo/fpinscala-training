@@ -204,3 +204,69 @@ class Exercise3_24Spec extends Specification {
     }
   }
 }
+
+class Exercise3_25Spec extends Specification {
+  "Exercise3_25" should {
+    "ノード数が数えられること" in {
+      val tree = Branch(Branch(Leaf(1), Leaf(2)),   Branch(Leaf(3), Leaf(4)))
+      Exercise3_25.size(tree) must be_==(7)
+      Exercise3_25.size(Leaf(1)) must be_==(1)
+    }
+  }
+}
+
+class Exercise3_26Spec extends Specification {
+  "Exercise3_26" should {
+    "maximumが計算できること" in {
+      val tree = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))
+      Exercise3_26.maximum(tree) must be_==(4)
+      Exercise3_26.maximum(Leaf(1)) must be_==(1)
+    }
+  }
+}
+
+class Exercise3_27Spec extends Specification {
+  "Exercise3_27" should {
+    "最長パスが計算ができること" in {
+      Exercise3_27.depth(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))) must be_==(2)
+      Exercise3_27.depth(Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))) must be_==(2)
+      Exercise3_27.depth(Leaf(1)) must be_==(0)
+    }
+  }
+
+}
+
+class Exercise3_28Spec extends Specification {
+  "Exercise3_28" should {
+    "mapができること" in {
+      Exercise3_28.map(Leaf(3))(a=>a.toString) must be_==(Leaf("3"))
+      Exercise3_28.map(Branch(Leaf(1),Leaf(2)))(a=>a.toString) must be_==(Branch(Leaf("1"),Leaf("2")))
+    }
+  }
+}
+
+class Exercise3_29Spec extends Specification {
+  val tree = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))
+  "Exercise3_29" should {
+    "foldができること" in {
+      Exercise3_29.fold(tree)(a=>a.toString)(_+_) must be_==("1234")
+    }
+
+    "foldを使ってsizeが計算できること" in {
+
+      Exercise3_29.sizeViaFold(tree) must be_==(Exercise3_25.size(tree))
+    }
+
+    "foldを使ってmaximumが計算できること" in {
+      Exercise3_29.maximumViaFold(tree) must be_==(Exercise3_26.maximum(tree))
+    }
+
+    "foldを使ってdepthが計算できること" in {
+      Exercise3_29.depthViaFold(tree) must be_==(Exercise3_27.depth(tree))
+    }
+
+    "foldを使ってmapができること" in {
+      Exercise3_29.mapViaFold(tree)(a=>a.toString) must be_==(Exercise3_28.map(tree)(a=>a.toString))
+    }
+  }
+}
