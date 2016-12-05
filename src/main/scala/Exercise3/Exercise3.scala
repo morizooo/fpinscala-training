@@ -200,37 +200,60 @@ object Exercise3_24 {
 
 object Exercise3_25 {
   // 二分木のノード数を数えるsizeを実装せよ
-  def size[A](t: Tree[A]): Int = ???
+  def size[A](t: Tree[A]): Int = t match {
+    case Leaf(_) => 1
+    case Branch(l, r) => size(l) + size(r) + 1
+  }
 }
 
 object Exercise3_26 {
   // 二分木の最大の要素を返すmaximumを実装せよ
-  def maximum(t: Tree[Int]): Int = ???
+  def maximum(t: Tree[Int]): Int = t match {
+    case Leaf(n) => n
+    case Branch(l, r) => maximum(l).max(maximum(r))
+  }
 }
 
 object Exercise3_27 {
   // 二分木のルートから任意のLeafまでの最長パスを返すdepth関数を実装せよ
-  def depth[A](t: Tree[A]): Int = ???
+  def depth[A](t: Tree[A]): Int = t match {
+    case Leaf(_) => 0
+    case Branch(l, r) => (depth(l).max(depth(r))) + 1
+  }
 }
 
 object Exercise3_28 {
   // 二分木の各要素を特定の関数を使って変更するmap関数を記述せよ。
-  def map[A, B](t: Tree[A])(f: A => B): Tree[B] = ???
+  def map[A, B](t: Tree[A])(f: A => B): Tree[B] = t match {
+    case Leaf(a) => Leaf(f(a))
+    case Branch(l, r) => Branch(map(l)(f), map(r)(f))
+  }
 }
 
 object Exercise3_29 {
   // size,maximum,depth,mapを一般化し、それらの類似点を抽象化する新しいfold関数を記述せよ。
-  def fold[A, B](t: Tree[A])(f: A => B)(g: (B, B) => B): B = ???
+  def fold[A, B](t: Tree[A])(f: A => B)(g: (B, B) => B): B = t match {
+    case Leaf(a) => f(a)
+    case Branch(l, r) => g(fold(l)(f)(g), fold(r)(f)(g))
+  }
 
   // foldを使ってsizeを実装せよ
-  def sizeViaFold[A](t: Tree[A]): Int = ???
+  def sizeViaFold[A](t: Tree[A]): Int = {
+    fold(t)(a => 1)(_ + _ + 1)
+  }
 
   // foldを使ってmaximumを実装せよ
-  def maximumViaFold(t: Tree[Int]): Int = ???
+  def maximumViaFold(t: Tree[Int]): Int = {
+    fold(t)(a => a)(_ max _)
+  }
 
   // foldを使ってdepthを実装せよ
-  def depthViaFold[A](t: Tree[A]): Int = ???
+  def depthViaFold[A](t: Tree[A]): Int = {
+    fold(t)(a => 0)(_ max _ + 1)
+  }
 
   // foldを使ってmapを実装せよ
-  def mapViaFold[A, B](t: Tree[A])(f: A => B): Tree[B] = ???
+  def mapViaFold[A, B](t: Tree[A])(f: A => B): Tree[B] = {
+    fold(t)(a => Leaf(f(a)): Tree[B])(Branch(_,_))
+  }
 }
