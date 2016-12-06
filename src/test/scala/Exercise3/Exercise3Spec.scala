@@ -2,10 +2,16 @@ package Exercise3
 
 import org.specs2.mutable.Specification
 
+import scala.util.Try
+
 class Exercise3_2Spec extends Specification {
   "Exercise3_2" should {
     "最初の要素を削除できること" in {
       Exercise3_2.tail(List("1", "2", "3")) must be_==(List("2", "3"))
+    }
+
+    "要素がない場合はエラーとなること" in {
+      Try(Exercise3_2.tail(Nil)) must beFailedTry
     }
   }
 }
@@ -15,6 +21,10 @@ class Exercise3_3Spec extends Specification {
     "最初の要素を置き換えできること" in {
       Exercise3_3.setHead(List("1", "2", "3"), "4") must be_==(List("4", "2", "3"))
     }
+  }
+
+  "要素がない場合はエラーとなること" in {
+    Try(Exercise3_3.setHead(Nil, "1")) must beFailedTry
   }
 }
 
@@ -47,6 +57,10 @@ class Exercise3_6Spec extends Specification {
     "最後の要素を削除できること" in {
       Exercise3_6.init(List("1", "2", "3")) must be_==(List("1", "2"))
     }
+  }
+
+  "要素がない場合はエラーとなること" in {
+    Try(Exercise3_6.init(Nil)) must beFailedTry
   }
 }
 
