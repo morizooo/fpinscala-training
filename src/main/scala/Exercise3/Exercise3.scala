@@ -71,7 +71,7 @@ object Exercise3_8 {
 }
 
 object Exercise3_9 {
-  // foldRigthを使って要素数を取得するlengthを実装せよ
+  // foldRightを使って要素数を取得するlengthを実装せよ
   def length[A](l: List[A]): Int = List.foldRight(l, 0)((_, acc) => acc + 1)
 }
 
