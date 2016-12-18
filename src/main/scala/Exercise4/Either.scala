@@ -1,7 +1,7 @@
 package Exercise4
 
 sealed trait Either[+E, +A] {
-  // Exercise4_6
+  // Exercise4_6 以下の関数を実装せよ
   def map[B](f: A => B): Either[E, B] = ???
 
   def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] = ???

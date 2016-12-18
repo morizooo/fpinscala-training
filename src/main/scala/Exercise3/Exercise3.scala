@@ -111,11 +111,11 @@ object Exercise3_13 {
 }
 
 object Exercise3_14 {
-  // foldLeftを使ってappendを実装せよ
+  // foldRightを使ってappendを実装せよ
   def appendViaFoldRight[A](a1: List[A], a2: List[A]): List[A] =
   List.foldRight(a1, a2)(Cons(_, _))
 
-  // foldRightを使ってappendを実装せよ
+  // foldLeftを使ってappendを実装せよ
   def appendViaFoldLeft[A](a1: List[A], a2: List[A]): List[A] =
   Exercise3_10.foldLeft(Exercise3_12.reverse(a1), a2)((a, b) => Cons(b, a))
 }
@@ -145,7 +145,7 @@ object Exercise3_18 {
 }
 
 object Exercise3_19 {
-  // 与えられた述語条件が満たされるまでリストから要素を削除するるfilterを実装せよ
+  // 与えられた述語条件が満たされるまでリストから要素を削除するfilterを実装せよ
   def filter[A](l: List[A])(f: A => Boolean): List[A] =
   List.foldRight(l, Nil: List[A])((x, xs) => if (f(x)) Cons(x, xs) else xs)
 }
