@@ -6,4 +6,4 @@ Scala関数型デザイン＆プログラミングの問題とそれに対する
 
 解答は[answerブランチ](https://github.com/morizooo/fpinscala-training/tree/answer)か[公式資料](https://github.com/fpinscala/fpinscala)を御覧ください。
 
-現在３章まで対応してます。
+現在4章まで対応してます。

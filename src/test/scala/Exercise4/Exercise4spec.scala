@@ -2,8 +2,6 @@ package Exercise4
 
 import org.specs2.mutable.Specification
 
-import scala.util.Try
-
 class Exercise4_1Spec extends Specification {
   "Exercise4_1" should {
     "map" should {
@@ -96,8 +94,73 @@ class Exercise4_4Spec extends Specification {
 class Exercise4_5Spec extends Specification {
   "Exercise4_5" should {
     "StringをIntに変換する処理ができること" in {
-      Exercise4_5.traverse(List(1,2,3))(i => Some(i.toString)) must be_==(Some(List("1","2","3")))
+      Exercise4_5.traverse(List(1, 2, 3))(i => Some(i.toString)) must be_==(Some(List("1", "2", "3")))
     }
+  }
+
+}
+
+class Exercise4_6Spec extends Specification {
+  "Exercise4_6" should {
+    "map" should {
+      "IntをStringに変換する処理ができること" in {
+        val e = Right(2)
+        e.map(i => i.toString) must be_==(Right("2"))
+      }
+
+      "Leftは操作されないこと" in {
+        val e = Left(2)
+        e.map(i => i.toString) must be_==(Left(2))
+      }
+    }
+
+    "flatMap" should {
+      "flatMapできること" in {
+        val e = Right(2)
+        e.flatMap(i => Right((i + 2).toString)) must be_==(Right("4"))
+      }
+    }
+
+    "orElse" should {
+      "Rightは変わらないこと" in {
+        val e = Right(2)
+        e.orElse(Right("change")) must be_==(Right(2))
+      }
+
+      "Leftの場合は値が変わること" in {
+        val e = Left("error")
+        e.orElse(Right("change")) must be_==(Right("change"))
+      }
+    }
+
+    "map2" should {
+      "map2できること" in {
+        Right("lastname").map2(Right("firstname"))(_ + _) must be_==(Right("lastnamefirstname"))
+      }
+    }
+
+  }
+
+}
+
+class Exercise4_7Spec extends Specification {
+  "Exercise4_7" should {
+    "traverse" should {
+      "traverseできること" in {
+        Exercise4_7.traverse(List(1, 2, 3))(i => Right(i.toString)) must be_==(Right(List("1", "2", "3")))
+      }
+    }
+
+    "sequence" should {
+      "Leftがあると、最初のLeftを返すこと" in {
+        Exercise4_7.sequence(List(Right(1), Left("error"), Right(2), Right(3))) must be_==(Left("error"))
+      }
+
+      "エラーがないとListを返すこと" in {
+        Exercise4_7.sequence(List(Right(1), Right(2), Right(3))) must be_==(Right(List(1, 2, 3)))
+      }
+    }
+
   }
 
 }

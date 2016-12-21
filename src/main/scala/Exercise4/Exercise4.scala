@@ -4,6 +4,10 @@ object Exercise4_2 {
   // flatMapをベースとして分散を求めるvarianceを実装せよ
   // シーケンスの平均をm,シーケンスの各要素をxとすれば分散は math.pow(x - m, 2)
   def variance(xs: Seq[Double]): Option[Double] = ???
+
+  def mean(xs: Seq[Double]): Option[Double] =
+    if (xs.isEmpty) None
+    else Some(xs.sum / xs.length)
 }
 
 object Exercise4_3 {
