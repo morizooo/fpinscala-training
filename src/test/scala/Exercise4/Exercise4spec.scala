@@ -96,6 +96,10 @@ class Exercise4_5Spec extends Specification {
     "StringをIntに変換する処理ができること" in {
       Exercise4_5.traverse(List(1, 2, 3))(i => Some(i.toString)) must be_==(Some(List("1", "2", "3")))
     }
+
+    "NilならSome(Nil)になること" in {
+      Exercise4_5.traverse(Nil)(i => Some(i.toString)) must be_==(Some(Nil))
+    }
   }
 
 }
@@ -148,6 +152,10 @@ class Exercise4_7Spec extends Specification {
     "traverse" should {
       "traverseできること" in {
         Exercise4_7.traverse(List(1, 2, 3))(i => Right(i.toString)) must be_==(Right(List("1", "2", "3")))
+      }
+
+      "NilならRight(Nil)になること" in {
+        Exercise4_7.traverse(Nil)(i => Right(i.toString)) must be_==(Right(Nil))
       }
     }
 
