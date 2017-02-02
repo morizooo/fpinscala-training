@@ -2,8 +2,15 @@ package Exercise5
 
 trait Stream[+A] {
   // Exercise5_1 StreamをListに変換し、それによりストリームを強制的に評価する関数を実装せよ
-  def toList: List[A] = ???
-  // @annotation.tailrec
+  def toList: List[A] = {
+    @annotation.tailrec
+    def go(s: Stream[A], acc: List[A]): List[A] = s match {
+      case Cons(h, t) => go(t(), h() :: acc)
+      case _ => acc
+    }
+
+    go(this, List()).reverse
+  }
 
   // Exercise5_2
   // Streamの先頭からn個の要素を取り出す関数を実装せよ
