@@ -148,13 +148,13 @@ class Exercise5_9Spec extends Specification {
   }
 }
 
-class Exercise5_10Spec extends Specification {
-  "Exercise5_10_fibs" should {
-    "フィボナッチ数列の無限ストリームを作成できた場合" in {
-      Stream.fibs.take(7).toList must be_==(List(0, 1, 1, 2, 3, 5, 8))
-    }
-  }
-}
+//class Exercise5_10Spec extends Specification {
+//  "Exercise5_10_fibs" should {
+//    "フィボナッチ数列の無限ストリームを作成できた場合" in {
+//      Stream.fibs.take(7).toList must be_==(List(0, 1, 1, 2, 3, 5, 8))
+//    }
+//  }
+//}
 
 class Exercise5_11Spec extends Specification {
   "Exercise5_11_unfold" should {
@@ -164,28 +164,28 @@ class Exercise5_11Spec extends Specification {
   }
 }
 
-class Exercise5_12Spec extends Specification {
-  "Exercise5_12_onesViaUnfold" should {
-    "特定の値の無限ストリームを作成できた場合" in {
-      Stream.onesViaUnfold.take(10).toList must be_==(List(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
-    }
-  }
-  "Exercise5_12_constantViaUnfold" should {
-    "特定の値の無限ストリームを作成できた場合" in {
-      Stream.constantViaUnfold(5).take(10).toList must be_==(List(5, 5, 5, 5, 5, 5, 5, 5, 5, 5))
-    }
-  }
-  "Exercise5_12_fromViaUnfold" should {
-    "特定の値に+1がされていった値の無限ストリームを作成できた場合" in {
-      Stream.fromViaUnfold(5).take(10).toList must be_==(List(5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
-    }
-  }
-  "Exercise5_12_fibsViaUnfold" should {
-    "フィボナッチ数列の無限ストリームを作成できた場合" in {
-      Stream.fibsViaUnfold.take(7).toList must be_==(List(0, 1, 1, 2, 3, 5, 8))
-    }
-  }
-}
+//class Exercise5_12Spec extends Specification {
+//  "Exercise5_12_onesViaUnfold" should {
+//    "特定の値の無限ストリームを作成できた場合" in {
+//      Stream.onesViaUnfold.take(10).toList must be_==(List(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+//    }
+//  }
+//  "Exercise5_12_constantViaUnfold" should {
+//    "特定の値の無限ストリームを作成できた場合" in {
+//      Stream.constantViaUnfold(5).take(10).toList must be_==(List(5, 5, 5, 5, 5, 5, 5, 5, 5, 5))
+//    }
+//  }
+//  "Exercise5_12_fromViaUnfold" should {
+//    "特定の値に+1がされていった値の無限ストリームを作成できた場合" in {
+//      Stream.fromViaUnfold(5).take(10).toList must be_==(List(5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
+//    }
+//  }
+//  "Exercise5_12_fibsViaUnfold" should {
+//    "フィボナッチ数列の無限ストリームを作成できた場合" in {
+//      Stream.fibsViaUnfold.take(7).toList must be_==(List(0, 1, 1, 2, 3, 5, 8))
+//    }
+//  }
+//}
 
 class Exercise5_13Spec extends Specification {
 
