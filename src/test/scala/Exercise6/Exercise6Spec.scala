@@ -132,6 +132,45 @@ class Exercise6_3_double3 extends Specification {
   }
 }
 
+class Exercise6_4_Ints extends Specification {
+  "Exercise6_4_Ints" should {
+    "0を指定した場合に、空のリストが返って来ること" in {
+      val rng = Simple(1)
+      RNG.ints(0)(rng) must be_==(List(), rng)
+    }
+    "1を指定した場合に、空のリストが返って来ること" in {
+      val rng = Simple(1)
+      RNG.ints(1)(rng) must be_==(List(rng.nextInt._1), rng.nextInt._2)
+    }
+    "2を指定した場合に、空のリストが返って来ること" in {
+      val rng = Simple(1)
+      val (d1, rng2) = rng.nextInt
+      RNG.ints(2)(rng) must be_==(List(rng.nextInt._1, rng2.nextInt._1), rng2.nextInt._2)
+    }
+  }
+}
+
+class Exercise6_5Spec extends Specification {
+  "Exercise6_5_double" should {
+    "正の値でもランダムな整数を生成できること" in {
+      val rng = Simple(1)
+      RNG._double(rng) must be_==((rng.nextInt._1 / (Int.MaxValue.toDouble + 1), rng.nextInt._2))
+    }
+    "負の値でもランダムな整数を生成できること" in {
+      val rng = Simple(-1)
+      RNG._double(rng) must be_==((-(rng.nextInt._1 + 1) / (Int.MaxValue.toDouble + 1), rng.nextInt._2))
+    }
+    "正の値の最大値でもランダムな整数を生成できること" in {
+      val rng = Simple(Int.MaxValue)
+      RNG._double(rng) must be_==((rng.nextInt._1 / (Int.MaxValue.toDouble + 1), rng.nextInt._2))
+    }
+    "負の値の最小値でもランダムな整数を生成できること" in {
+      val rng = Simple(Int.MinValue)
+      RNG._double(rng) must be_==((-(rng.nextInt._1 + 1) / (Int.MaxValue.toDouble + 1), rng.nextInt._2))
+    }
+  }
+}
+
 trait AnswerRNG {
   def nextInt: (Int, RNG)
 }
